@@ -8,8 +8,8 @@
     </head>
     <body>
         <form action="${linkTo[PortfolioController].autenticar}" method="POST">
-            <input type="text" class="form-control" name="p.login" placeholder="Login" />
-            <input type="password" class="form-control" name="p.senha" placeholder="Senha" />
+            <input type="text" class="form-control" name="p.user" placeholder="Login" />
+            <input type="password" class="form-control" name="p.pass" placeholder="Senha" />
             <button type="submit" class="btn btn-primary form-control">Login</button>
         </form>
 

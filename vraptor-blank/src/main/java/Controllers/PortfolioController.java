@@ -21,39 +21,54 @@ import modelo.Person;
 @Path("/portfolio")
 public class PortfolioController {
 
-     @Inject
+    @Inject
     private Validator validator;
     @Inject
     private logged loggedUser;
     @Inject
     private Result result;
-    
-    
-    
-    @Get(value = {"", "/"})
+
+    @Public
+    @Get(value = {"", "/",})
     public void login() {
         System.out.println("Abrindo a página login");
+    }
+
+    @Path(value = {"{id}"}, priority = Path.LOW)
+    @Get
+    public void edit(String id) {
+        result.include("carro", id);
+        result.forwardTo(this).form();
+    }
+
+    @Path(value = {"/new"}, priority = Path.HIGH)
+    @Get
+    public void form() {
+
     }
 
     public void register() {
         System.out.println("Abrindo a página register");
     }
-    
-    public void erro() {
-        System.out.println("Erro");
+
+    public void Panel() {
+        System.out.println("Abrindo a página me");
     }
 
-    @Public 
+    public void erro() {
+        System.out.println("Erro de Autenticação");
+    }
+
+    @Public
     @Post
-    public void done(Person p){
+    public void done(Person p) {
         try {
 
-        }catch(NullPointerException ex){
-             validator.add(new SimpleMessage("invalid", "Digite todos os dados!"));
+        } catch (NullPointerException ex) {
+            validator.add(new SimpleMessage("invalid", "Digite todos os dados!"));
         }
     }
-    
-    
+
     @Public
     @Post
     public void autenticar(Person p) {
@@ -62,13 +77,14 @@ public class PortfolioController {
                 p.setName("Administrador do sistema");
                 this.loggedUser.login(p);
                 this.result.redirectTo("/");
+                
+                return;
             } else {
                 validator.add(new SimpleMessage("invalid", "Login e/ou Senha inválidos!"));
             }
         } catch (NullPointerException ex) {
             validator.add(new SimpleMessage("invalid", "Login e/ou Senha inválidos!"));
         }
-        validator.onErrorForwardTo(this).erro();
+        validator.onErrorForwardTo(this).login();
     }
-     
 }
