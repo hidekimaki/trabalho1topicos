@@ -35,10 +35,24 @@ public class PortfolioController {
         System.out.println("Abrindo a página login");
     }
 
+    public void register() {
+        System.out.println("Abrindo a página register");
+    }
+    
     public void erro() {
         System.out.println("Erro");
     }
 
+    @Public 
+    @Post
+    public void done(Person p){
+        try {
+
+        }catch(NullPointerException ex){
+             validator.add(new SimpleMessage("invalid", "Digite todos os dados!"));
+        }
+    }
+    
     
     @Public
     @Post
