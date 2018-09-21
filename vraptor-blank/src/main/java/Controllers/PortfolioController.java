@@ -34,6 +34,7 @@ public class PortfolioController {
         System.out.println("Abrindo a página login");
     }
 
+    
     @Path(value = {"{id}"}, priority = Path.LOW)
     @Get
     public void edit(String id) {
@@ -47,7 +48,9 @@ public class PortfolioController {
 
     }
 
-    public void register() {
+    public void register(){
+        if(loggedUser.isLogged())
+            result.redirectTo(this).Panel();
         System.out.println("Abrindo a página register");
     }
 

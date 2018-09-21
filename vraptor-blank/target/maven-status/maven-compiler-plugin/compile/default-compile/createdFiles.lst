@@ -2,8 +2,8 @@ modelo\Document.class
 autorizacao\Public.class
 br\edu\utfpr\md\webapp\PrimeiroController.class
 modelo\Category.class
+autorizacao\Interceptor.class
 modelo\Keyword.class
-autorizacao\interceptor.class
 Controllers\PortfolioController.class
 autorizacao\logged.class
 modelo\Person.class
