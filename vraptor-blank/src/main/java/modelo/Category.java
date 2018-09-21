@@ -5,26 +5,31 @@
  */
 package modelo;
 
-/**
- *
- * @author Hideki
- */
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+
+@Entity
 public class Category {
-    private int id;
+    
+        @Id
+    private ObjectId id;
+    
     private String name;
 
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    
     public Category(String name) {
         this.name = name;
     }
     
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }

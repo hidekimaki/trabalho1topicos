@@ -1,11 +1,15 @@
 package modelo;
 
 import java.util.List;
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 
-
+@Entity
 public class Document {
+        @Id
+    private ObjectId id;
     
-    private int id;
     private long date;
     private long lastupdate;
     private String filename;
@@ -23,16 +27,18 @@ public class Document {
     public Document() {
     }
 
-    
-    
-    
-    public int getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
+
+    
+    
+    
+
 
     public long getDate() {
         return date;
