@@ -28,6 +28,8 @@ public class PortfolioController {
     @Inject
     private Result result;
 
+    
+    
     @Public
     @Get(value = {"", "/",})
     public void login() {
@@ -47,17 +49,27 @@ public class PortfolioController {
     public void form() {
 
     }
-
+    
+    @Path(value = {"/register",})
+    @Post
     public void register(){
-        if(loggedUser.isLogged())
-            result.redirectTo(this).Panel();
+        if(loggedUser.isLogged()){ 
+           result.redirectTo(this).panel();
+        }
+    
+        
+        
         System.out.println("Abrindo a página register");
     }
-
-    public void Panel() {
+    
+    @Path(value = {"/panel",})
+    @Get
+    public void panel() {
+          result.include("nome", loggedUser.getPessoa());
         System.out.println("Abrindo a página me");
     }
-
+    
+    @Get
     public void erro() {
         System.out.println("Erro de Autenticação");
     }
@@ -79,7 +91,7 @@ public class PortfolioController {
             if (p.getUser().equals("admin") && p.getPass().equals("1234")) {
                 p.setName("Administrador do sistema");
                 this.loggedUser.login(p);
-                this.result.redirectTo("/");
+                this.result.redirectTo("/portfolio/panel");
                 
                 return;
             } else {
@@ -88,6 +100,6 @@ public class PortfolioController {
         } catch (NullPointerException ex) {
             validator.add(new SimpleMessage("invalid", "Login e/ou Senha inválidos!"));
         }
-        validator.onErrorForwardTo(this).login();
+        validator.onErrorForwardTo(this).erro();
     }
 }

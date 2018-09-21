@@ -1,9 +1,14 @@
 modelo\Document.class
-autorizacao\Public.class
+DAO\MongoClientProvider.class
 br\edu\utfpr\md\webapp\PrimeiroController.class
+DAO\DocumentoDAO.class
+DAO\CategoryDAO.class
+autorizacao\logged.class
+DAO\KeywordDAO.class
+autorizacao\Public.class
 modelo\Category.class
 autorizacao\Interceptor.class
 modelo\Keyword.class
 Controllers\PortfolioController.class
-autorizacao\logged.class
+DAO\UserDAO.class
 modelo\Person.class

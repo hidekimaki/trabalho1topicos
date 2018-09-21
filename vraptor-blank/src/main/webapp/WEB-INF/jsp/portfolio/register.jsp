@@ -17,19 +17,19 @@
             <li id="li_1" >
                 <label for="element_1">Nome: </label>
                 <div>
-                    <input id="element_1" name="element_1" type="text" maxlength="255" value=""/> 
+                    <input id="element_1" name="p.name" type="text" maxlength="255" value=""/> 
                 </div> 
             </li>		
             <li id="li_2" >
                 <label  for="element_2">Usuario: </label>
                 <div>
-                    <input id="element_2" name="element_2" type="text" maxlength="255" value=""/> 
+                    <input id="element_2" name="p.user" type="text" maxlength="255" value=""/> 
                 </div> 
             </li>		
             <li id="li_3" >
                 <label for="element_3">Senha: </label>
                 <div>
-                    <input id="element_3" name="element_3" type="password" maxlength="255" value=""/> 
+                    <input id="element_3" name="p.pass" type="password" maxlength="255" value=""/> 
                 </div> 
             </li>	    
             <input id="saveForm" type="submit" name="submit" value="Registrar" />

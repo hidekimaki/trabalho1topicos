@@ -12,6 +12,6 @@
         <title>Me</title>
     </head>
     <body>
-        <h1>Me!</h1>
+        <h1>${nome.getName()}</h1>
     </body>
 </html>
