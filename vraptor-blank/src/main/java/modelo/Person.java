@@ -1,9 +1,14 @@
 package modelo;
 
 import java.util.List;
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 
+@Entity
 public class Person {
-    private int id;
+        @Id
+    private ObjectId id;
     private String name;
     private String user;
     private String pass;
@@ -27,13 +32,14 @@ public class Person {
         this.pass = pass;
     }
 
-    public int getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
+
 
     public String getName() {
         return name;
