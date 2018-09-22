@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import DAO.UserDAO;
 import autorizacao.Public;
 import autorizacao.logged;
 import br.com.caelum.vraptor.Controller;
@@ -15,6 +16,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import javax.inject.Inject;
+import javax.validation.Valid;
 import modelo.Person;
 
 @Controller
@@ -27,7 +29,8 @@ public class PortfolioController {
     private logged loggedUser;
     @Inject
     private Result result;
-
+    @Inject
+    private UserDAO personDAO;
     
     
     @Public
@@ -54,12 +57,29 @@ public class PortfolioController {
     @Post
     public void register(){
         if(loggedUser.isLogged()){ 
-           result.redirectTo(this).panel();
+           //result.redirectTo(this).panel();
         }
     
         
         
         System.out.println("Abrindo a página register");
+    }
+    
+     @Post
+    public void save(@Valid Person p) {
+        validator.onErrorForwardTo(this).form();
+        System.out.println("Marca: " + p.getName());
+        System.out.println("Modelo: " + p.getUser());
+        System.out.println("Modelo: " + p.getPass());
+        
+        try {
+            //this.carroDAO.insert(carro);
+            this.personDAO.save(p);
+        }catch(Exception ex) {
+            ex.printStackTrace();
+            validator.add(new SimpleMessage("dao", "Erro ao gravar Carro"));
+        }
+         result.redirectTo(this).panel();
     }
     
     @Path(value = {"/panel",})

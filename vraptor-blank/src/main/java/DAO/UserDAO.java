@@ -6,18 +6,17 @@
 package DAO;
 
 import com.mongodb.MongoClient;
+import javax.inject.Inject;
 import modelo.Person;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
 
-/**
- *
- * @author utfpr
- */
+
 public class UserDAO extends BasicDAO<Person, ObjectId>{
-    
-    public UserDAO(Class<Person> entityClass, MongoClient mongoClient, Morphia morphia, String dbName) {
+
+       @Inject
+       public UserDAO(MongoClient mongoClient) {
         super(Person.class, mongoClient, new Morphia(), MongoClientProvider.DATABASE);
     }
     

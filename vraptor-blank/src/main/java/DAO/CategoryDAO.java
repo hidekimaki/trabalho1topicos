@@ -6,6 +6,7 @@
 package DAO;
 
 import com.mongodb.MongoClient;
+import javax.inject.Inject;
 import modelo.Category;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Morphia;
@@ -17,7 +18,8 @@ import org.mongodb.morphia.dao.BasicDAO;
  */
 public  class CategoryDAO extends BasicDAO<Category, ObjectId>{
   
-    public CategoryDAO(Class<Category> entityClass, MongoClient mongoClient, Morphia morphia, String dbName) {
+    @Inject
+    public CategoryDAO(MongoClient mongoClient) {
         super(Category.class, mongoClient,new Morphia(), MongoClientProvider.DATABASE);
     }
   
