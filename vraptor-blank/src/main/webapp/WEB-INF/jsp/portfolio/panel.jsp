@@ -32,5 +32,31 @@
           </a>
         </div>
         <h1>${usuario.getName()}</h1>
+        <div>
+            <div>
+                <a href="./new" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" style="
+    margin-bottom: 10px;
+    margin-right: 0px;">+ Adicionar Novo Documento</a>    
+            </div>
+            <div style="margin-left: 10px; margin-right: 10px; top: 0px;">
+            
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Ações</th>
+            </tr>
+                <c:forEach items="${carroList}" var="car">
+                    <tr>
+                        <td>${car.id}</td>
+                        <td>${car.marca}</td>
+                        <td>${car.modelo}</td>
+                        <td></td>
+                    </tr>
+                </c:forEach>
+            </table>
+                </div>
+        </div>
     </body>
 </html>

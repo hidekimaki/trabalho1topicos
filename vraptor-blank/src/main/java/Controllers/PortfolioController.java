@@ -102,7 +102,7 @@ public class PortfolioController {
     @Public
     @Post
     public void done(Person p) {
-        try {
+        try{
 
         } catch (NullPointerException ex) {
             validator.add(new SimpleMessage("invalid", "Digite todos os dados!"));
