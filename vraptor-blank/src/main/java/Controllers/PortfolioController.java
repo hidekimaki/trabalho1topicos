@@ -36,6 +36,7 @@ public class PortfolioController {
     @Public
     @Get(value = {"", "/",})
     public void login() {
+        result.include("status", loggedUser.isLogged());
         if(loggedUser.isLogged()){ 
            //result.redirectTo(this).panel();
         }
@@ -84,13 +85,17 @@ public class PortfolioController {
             validator.add(new SimpleMessage("dao", "Erro ao gravar Carro"));
         }
          result.redirectTo(this).panel();
+        
     }
     
     @Path(value = {"/panel",})
     @Get
-    public void panel() {
+    public void panel(){
           result.include("nome", loggedUser.getPessoa());
         System.out.println("Abrindo a página me");
+        if(!loggedUser.isLogged()){
+           System.out.println("Deslogado");
+        }
     }
     
     @Get
@@ -106,6 +111,15 @@ public class PortfolioController {
         } catch (NullPointerException ex) {
             validator.add(new SimpleMessage("invalid", "Digite todos os dados!"));
         }
+    }
+    
+
+    @Public
+    @Get
+    @Path(value = {"/logout",})
+    public void logout(){
+        loggedUser.logout();
+        result.redirectTo(this).login();
     }
 
     @Public
