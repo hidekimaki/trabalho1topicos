@@ -121,18 +121,20 @@ public class PortfolioController {
     @Public
     @Post
     public void autenticar(Person p) {
-        try {
-            if (p.getUser().equals("admin") && p.getPass().equals("1234")) {
-                p.setName("Administrador do sistema");
-                this.loggedUser.login(p);
+        Person teste = personDAO.createQuery().field("user").equal(p.getUser()).get();
+        if(teste== null){
+            System.out.println("null");
+    
+             validator.add(new SimpleMessage("invalid", "User inválidos!"));
+        }else{
+           System.out.println("User  exite");
+           if(teste.getPass().equals(p.getPass())){
+                this.loggedUser.login(teste);
                 this.result.redirectTo("/portfolio/panel");
-                
                 return;
-            } else {
-                validator.add(new SimpleMessage("invalid", "Login e/ou Senha inválidos!"));
-            }
-        } catch (NullPointerException ex) {
-            validator.add(new SimpleMessage("invalid", "Login e/ou Senha inválidos!"));
+           }else {
+                validator.add(new SimpleMessage("invalid", "Senha inválidos!"));
+           }
         }
         validator.onErrorForwardTo(this).erro();
     }
