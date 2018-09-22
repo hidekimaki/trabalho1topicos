@@ -48,7 +48,7 @@
                         <c:if test="${status}">                              
                           <li class="nav-item dropdown" style="position: absolute; right: 20px;">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
+                            ${usuario.getName()}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Action</a>

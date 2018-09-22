@@ -91,7 +91,7 @@ public class PortfolioController {
     @Get
     public void panel(){
         result.include("status", true);
-        result.include("nome", loggedUser.getPessoa());
+        result.include("usuario", loggedUser.getPessoa());
     }
     
     @Get
@@ -136,6 +136,6 @@ public class PortfolioController {
                 validator.add(new SimpleMessage("invalid", "Senha inválidos!"));
            }
         }
-        validator.onErrorForwardTo(this).erro();
+        validator.onErrorRedirectTo(this).login();
     }
 }

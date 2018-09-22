@@ -31,6 +31,6 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-        <h1>${nome.getName()}</h1>
+        <h1>${usuario.getName()}</h1>
     </body>
 </html>

@@ -8,7 +8,21 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<c:import url="/WEB-INF/jsp/includes/header.jsp" />     
+
+
+<c:import url="/WEB-INF/jsp/includes/header.jsp" />    
+
+        <c:if test="${not empty errors}">
+        <c:forEach items="${errors}" var="err">
+        <div class="alert alert-danger" role="alert" style="
+        width: 80%;
+        left: 10%;
+        margin-top: 1%;
+        margin-left: 0px">
+            ${err.message}
+        </div>
+        </c:forEach>
+        </c:if>
         <div style="
             position: absolute;
             width: 300px;
@@ -29,7 +43,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Senha</span>
                 </div>
-                <input type="text" class="form-control" name="p.pass"  aria-label="Username" aria-describedby="basic-addon1">
+                <input type="password" class="form-control" name="p.pass"  aria-label="Username" aria-describedby="basic-addon1">
             </div>
             
             <button style="margin-top: 10px" type="submit" class="btn btn-primary form-control">Login</button>
