@@ -36,9 +36,11 @@ public class PortfolioController {
     @Public
     @Get(value = {"", "/",})
     public void login() {
-        result.include("status", loggedUser.isLogged());
         if(loggedUser.isLogged()){ 
-           //result.redirectTo(this).panel();
+           result.include("status", true);
+           result.redirectTo(this).panel();
+        }else{
+           result.include("status", false);
         }
     
         System.out.println("Abrindo a página login");
@@ -62,15 +64,12 @@ public class PortfolioController {
     @Get
     public void register(){
         if(loggedUser.isLogged()){ 
-           //result.redirectTo(this).panel();
-        }
-    
-        
-        
+           result.redirectTo(this).panel();
+        }    
         System.out.println("Abrindo a página register");
     }
     
-     @Post
+    @Post
     public void save(@Valid Person p) {
         validator.onErrorForwardTo(this).form();
         System.out.println("Marca: " + p.getName());
@@ -91,11 +90,8 @@ public class PortfolioController {
     @Path(value = {"/panel",})
     @Get
     public void panel(){
-          result.include("nome", loggedUser.getPessoa());
-        System.out.println("Abrindo a página me");
-        if(!loggedUser.isLogged()){
-           System.out.println("Deslogado");
-        }
+        result.include("status", true);
+        result.include("nome", loggedUser.getPessoa());
     }
     
     @Get

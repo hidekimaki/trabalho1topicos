@@ -4,6 +4,7 @@
     Author     : Marcos
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -44,7 +45,7 @@
                     <li class="nav-item">
                         <a class="nav-link disabled" href="#">Disabled</a>
                     </li>
-                          <c:if ${pessoa == true}>
+                        <c:if test="${status}">                              
                           <li class="nav-item dropdown" style="position: absolute; right: 20px;">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Dropdown
@@ -56,7 +57,7 @@
                             <a class="dropdown-item" href="${linkTo[PortfolioController].logout}">Sair</a>
                         </div>
                     </li>
-                    <c:if/>
+                    </c:if>
                 </ul>
        
 
