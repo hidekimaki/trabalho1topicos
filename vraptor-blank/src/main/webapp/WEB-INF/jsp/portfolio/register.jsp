@@ -1,17 +1,16 @@
 <%-- 
-    Document   : register
-    Created on : 20/09/2018, 13:29:41
-    Author     : Marcos
+    Document   : login
+    Created on : 06/09/2018, 14:37:37
+    Author     : UTFPR
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
+
+<c:import url="/WEB-INF/jsp/includes/header.jsp" />     
+
+
         <h1>Register!</h1>
         <form id="form_27659" class="appnitro"  method="post" action="/formbuilder/view.php">
             <li id="li_1" >
