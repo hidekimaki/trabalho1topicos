@@ -15,6 +15,19 @@ public class Person {
     private int Rank;
     private List<Document> documentos;
 
+    
+    public void Delete(int index){
+        documentos.remove(index);
+    }
+    
+    public void Add(Document newdoc){
+        documentos.add(newdoc);
+    }
+    
+    public List<Document> getDocumentos() {
+        return documentos;
+    }
+
     public int getRank() {
         return Rank;
     }

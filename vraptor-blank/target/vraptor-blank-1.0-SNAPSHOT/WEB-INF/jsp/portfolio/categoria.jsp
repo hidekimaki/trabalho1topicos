@@ -26,26 +26,14 @@
          <form action="${linkTo[PortfolioController].autenticar}" method="POST">
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Nome do Documento</span>
+                    <span class="input-group-text" id="basic-addon1">Adicionar Nova Categoria</span>
                 </div>
-                <input type="text" class="form-control" name="p.user"  aria-label="Username" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" name="p.user"  aria-label="Nome" aria-describedby="basic-addon1">
             </div>
             
-            <div class="input-group" style="margin-top: 10px">
-                <select class="form-control">
-                <option>--</option>
-                <c:forEach items="${cat}" var="cat">
-                <option>${cat.name}</option>
-                </c:forEach>
-                </select>
-            </div>
-            <div class="custom-file" style="margin-top: 10px">
-                <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-                <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-                <div class="invalid-feedback">Example invalid custom file feedback</div>
-            </div>
+      
             
-            <button style="margin-top: 10px" type="submit" class="btn btn-primary form-control">Login</button>
+            <button style="margin-top: 10px" type="submit" class="btn btn-primary form-control">Salvar</button>
             </form>
     </body>
 </html>

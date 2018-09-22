@@ -15,8 +15,10 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
+import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
+import modelo.Document;
 import modelo.Person;
 
 @Controller
@@ -89,9 +91,11 @@ public class PortfolioController {
     
     @Path(value = {"/panel",})
     @Get
-    public void panel(){
+    public List<Document> panel(){
         result.include("status", true);
         result.include("usuario", loggedUser.getPessoa());
+        
+        return loggedUser.getPessoa().getDocumentos();
     }
     
     @Get
