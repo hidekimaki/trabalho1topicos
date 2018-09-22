@@ -36,6 +36,10 @@ public class PortfolioController {
     @Public
     @Get(value = {"", "/",})
     public void login() {
+        if(loggedUser.isLogged()){ 
+           //result.redirectTo(this).panel();
+        }
+    
         System.out.println("Abrindo a página login");
     }
 
@@ -54,7 +58,7 @@ public class PortfolioController {
     }
     
     @Path(value = {"/register",})
-    @Post
+    @Get
     public void register(){
         if(loggedUser.isLogged()){ 
            //result.redirectTo(this).panel();

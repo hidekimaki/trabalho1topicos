@@ -33,7 +33,7 @@
             </div>
             
             <button style="margin-top: 10px" type="submit" class="btn btn-primary form-control">Login</button>
-        </form>
+            </form>
             <br>
             <center>Novo por aqui ? <a href="${linkTo[PortfolioController].register}">Registre-se!</a></center>
-</div>
+        </div>

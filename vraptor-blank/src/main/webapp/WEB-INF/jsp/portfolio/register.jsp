@@ -12,7 +12,7 @@
 
 
         <h1>Register!</h1>
-        <form id="form_27659" class="appnitro"  method="post" action="/formbuilder/view.php">
+        <form id="form_27659" class="appnitro"  method="post" action="${linkTo[PortfolioController].save}">
             <li id="li_1" >
                 <label for="element_1">Nome: </label>
                 <div>
