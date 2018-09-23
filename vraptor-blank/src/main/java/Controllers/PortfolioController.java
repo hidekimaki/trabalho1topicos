@@ -18,6 +18,7 @@ import br.com.caelum.vraptor.validator.Validator;
 import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
+import modelo.Category;
 import modelo.Document;
 import modelo.Person;
 
@@ -33,8 +34,13 @@ public class PortfolioController {
     private Result result;
     @Inject
     private UserDAO personDAO;
+<<<<<<< HEAD
     
 
+=======
+    @Inject 
+    private CategoryDAO cateDAO;
+>>>>>>> 359739d2636c507219ede5c3c48435b331f40b2d
     
     @Public
     @Get(value = {"", "/",})
@@ -66,10 +72,17 @@ public class PortfolioController {
     @Public
     @Path(value = {"/register",})
     @Get
+<<<<<<< HEAD
     public void register() {
         if (loggedUser.isLogged()) {
             result.redirectTo(this).panel();
         }
+=======
+    public void register(){
+        if(loggedUser.isLogged()){ 
+           result.redirectTo(this).login();
+        }    
+>>>>>>> 359739d2636c507219ede5c3c48435b331f40b2d
         System.out.println("Abrindo a página register");
     }
 
@@ -114,6 +127,7 @@ public class PortfolioController {
 
     @Get
     @Path(value = {"/categories/new",})
+<<<<<<< HEAD
     public void categoria() {
 
     }
@@ -124,6 +138,27 @@ public class PortfolioController {
 
     }
 
+=======
+    public void categoria(){
+    }
+    
+    @Post
+    public void savecat(@Valid Category c) {
+        validator.onErrorForwardTo(this).form();
+        System.out.println("Nome: " + c.getName());
+        try {
+            this.cateDAO.save(c);
+        }catch(Exception ex) {
+            ex.printStackTrace();
+            validator.add(new SimpleMessage("dao", "Erro ao gravar Categoria"));
+        }
+         result.redirectTo(this).panel();
+    }
+    
+    
+    
+    
+>>>>>>> 359739d2636c507219ede5c3c48435b331f40b2d
     @Public
     @Post
     public void autenticar(Person p) {
