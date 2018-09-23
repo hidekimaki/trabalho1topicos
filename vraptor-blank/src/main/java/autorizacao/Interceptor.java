@@ -18,6 +18,7 @@ import javax.inject.Inject;
  *
  * @author Hideki
  */
+@Intercepts
 public class Interceptor {
     @Inject private logged loggedUser;
     @Inject private Result result;
@@ -34,7 +35,7 @@ public class Interceptor {
     public void intercept(SimpleInterceptorStack stack) {
         // Obtendo o usuário autenticado na sessão
         if(!loggedUser.isLogged()) {
-            result.forwardTo(PortfolioController.class).login();
+            result.redirectTo(PortfolioController.class).login();
         }
         stack.next();
     }

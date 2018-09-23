@@ -34,21 +34,21 @@ public class PortfolioController {
     @Inject
     private UserDAO personDAO;
     
+
     
     @Public
     @Get(value = {"", "/",})
     public void login() {
-        if(loggedUser.isLogged()){ 
-           result.include("status", true);
-           result.redirectTo(this).panel();
-        }else{
-           result.include("status", false);
+        if (loggedUser.isLogged()) {
+            result.include("status", true);
+            result.redirectTo(this).panel();
+        } else {
+            result.include("status", false);
         }
-    
+
         System.out.println("Abrindo a página login");
     }
 
-    
     @Path(value = {"{id}"}, priority = Path.LOW)
     @Get
     public void edit(String id) {
@@ -59,17 +59,20 @@ public class PortfolioController {
     @Path(value = {"/documents/new"}, priority = Path.HIGH)
     @Get
     public void form() {
-
+        
     }
+
     
+    @Public
     @Path(value = {"/register",})
     @Get
-    public void register(){
-        if(loggedUser.isLogged()){ 
-           result.redirectTo(this).panel();
-        }    
+    public void register() {
+        if (loggedUser.isLogged()) {
+            result.redirectTo(this).panel();
+        }
         System.out.println("Abrindo a página register");
     }
+
     
     @Post
     public void save(@Valid Person p) {
@@ -77,73 +80,67 @@ public class PortfolioController {
         System.out.println("Marca: " + p.getName());
         System.out.println("Modelo: " + p.getUser());
         System.out.println("Modelo: " + p.getPass());
-        
+
         try {
             //this.carroDAO.insert(carro);
             this.personDAO.save(p);
-        }catch(Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             validator.add(new SimpleMessage("dao", "Erro ao gravar Carro"));
         }
-         result.redirectTo(this).panel();
-        
+        result.redirectTo(this).panel();
     }
-    
+
     @Path(value = {"/panel",})
     @Get
-    public List<Document> panel(){
+    public void panel() {
         result.include("status", true);
         result.include("usuario", loggedUser.getPessoa());
-        
-        return loggedUser.getPessoa().getDocumentos();
     }
-    
+
     @Get
     public void erro() {
         System.out.println("Erro de Autenticação");
     }
 
-    @Public
-    @Post
-    public void done(Person p) {
-        try{
-
-        } catch (NullPointerException ex) {
-            validator.add(new SimpleMessage("invalid", "Digite todos os dados!"));
-        }
-    }
     
-
     @Public
     @Get
     @Path(value = {"/logout",})
-    public void logout(){
+    public void logout() {
         loggedUser.logout();
         result.redirectTo(this).login();
     }
 
     @Get
     @Path(value = {"/categories/new",})
-    public void categoria(){
+    public void categoria() {
 
     }
+
+    @Get
+    @Path(value = {"/categories/all",})
+    public void listcategories() {
+
+    }
+
     @Public
     @Post
     public void autenticar(Person p) {
         Person teste = personDAO.createQuery().field("user").equal(p.getUser()).get();
-        if(teste== null){
+        if (teste == null) {
             System.out.println("null");
-    
-             validator.add(new SimpleMessage("invalid", "User inválidos!"));
-        }else{
-           System.out.println("User  exite");
-           if(teste.getPass().equals(p.getPass())){
+
+            validator.add(new SimpleMessage("invalid", "User inválidos!"));
+        } else {
+            System.out.println("User  exite");
+            if (teste.getPass().equals(p.getPass())) {
                 this.loggedUser.login(teste);
                 this.result.redirectTo("/portfolio/panel");
                 return;
-           }else {
+            } else {
                 validator.add(new SimpleMessage("invalid", "Senha inválidos!"));
-           }
+            }
         }
         validator.onErrorRedirectTo(this).login();
     }

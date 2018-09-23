@@ -14,12 +14,12 @@
                 <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <br>
-            <form action="${linkTo[PortfolioController].autenticar}" method="POST">
+            <form action="${linkTo[PortfolioController].saveForm}" method="POST">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Nome do Documento</span>
+                        <span class="input-group-text"  id="basic-addon1">Nome do Documento</span>
                     </div>
-                    <input type="text" class="form-control" name="p.user"  aria-label="Username" aria-describedby="basic-addon1">
+                    <input type="text" value="" class="form-control" name="p.user"  aria-label="Username" aria-describedby="basic-addon1">
                 </div>
 
                 <div class="input-group" style="margin-top: 10px">
@@ -35,7 +35,24 @@
                     <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                     <div class="invalid-feedback">Example invalid custom file feedback</div>
                 </div>
-                <button style="margin-top: 10px" type="submit" class="btn btn-primary form-control">Salvar</button>
+                <br>
+                <br>
+                <h6>Etiquetas</h6>
+            <div class="progress" style=" height: 5px;">
+                
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+                <div class="input-group" style="margin-top: 10px">
+                    
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"  id="basic-addon1">Nova Etiqueta</span>
+                    </div>
+                    <input type="text" value="" class="form-control" name="p.user"  aria-label="Username" aria-describedby="basic-addon1" style="width: 326px;">                 
+                    <button style="margin-top: 0px" name="tag" value="tag" type="submit" class="btn btn-primary form-control">+</button>
+
+                </div>
+                
+                <button style="margin-top: 10px" name="action" value="Save" type="submit" class="btn btn-primary form-control">Salvar</button>
             </form>
         </div>
     </body>
