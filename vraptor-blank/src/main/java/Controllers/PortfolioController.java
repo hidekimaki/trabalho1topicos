@@ -56,7 +56,7 @@ public class PortfolioController {
         result.forwardTo(this).form();
     }
 
-    @Path(value = {"/new"}, priority = Path.HIGH)
+    @Path(value = {"/documents/new"}, priority = Path.HIGH)
     @Get
     public void form() {
 
@@ -122,6 +122,11 @@ public class PortfolioController {
         result.redirectTo(this).login();
     }
 
+    @Get
+    @Path(value = {"/categories/new",})
+    public void categoria(){
+
+    }
     @Public
     @Post
     public void autenticar(Person p) {

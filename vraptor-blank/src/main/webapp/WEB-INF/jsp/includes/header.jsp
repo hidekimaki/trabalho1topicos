@@ -46,11 +46,11 @@
                         <a class="nav-link disabled" href="#">Disabled</a>
                     </li>
                         <c:if test="${status}">                              
-                          <li class="nav-item dropdown" style="position: absolute; right: 20px;">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <li class="nav-item dropdown" style="float:right; right:0px; position:absolute">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                             ${usuario.getName()}
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="position: static;" >
                             <a class="dropdown-item" href="#">Action</a>
                             <a class="dropdown-item" href="#">Another action</a>
                             <div class="dropdown-divider"></div>
