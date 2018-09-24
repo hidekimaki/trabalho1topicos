@@ -1,6 +1,8 @@
 package modelo;
 
 import java.util.List;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
@@ -9,9 +11,13 @@ import org.mongodb.morphia.annotations.Id;
 public class Person {
         @Id
     private ObjectId id;
-    private String name;
+        
+     private String name;
+    
     private String user;
+    
     private String pass;
+    
     private int Rank;
     private List<Document> documentos;
 

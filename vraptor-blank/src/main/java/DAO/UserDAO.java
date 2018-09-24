@@ -11,13 +11,20 @@ import modelo.Person;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
+import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 
+public class UserDAO extends BasicDAO<Person, ObjectId> {
 
-public class UserDAO extends BasicDAO<Person, ObjectId>{
-
-       @Inject
-       public UserDAO(MongoClient mongoClient) {
+    @Inject
+    public UserDAO(MongoClient mongoClient) {
         super(Person.class, mongoClient, new Morphia(), MongoClientProvider.DATABASE);
     }
-    
+
+    public void updateUserDAO(Person p) {
+        UpdateOperations<Person> ops = this.createUpdateOperations();
+        Query<Person> pp = this.createQuery().field("id").equal(p.getId().toHexString());
+        this.update(pp, ops);
+    }
+
 }

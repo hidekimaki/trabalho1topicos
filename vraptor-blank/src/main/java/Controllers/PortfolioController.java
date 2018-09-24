@@ -35,10 +35,10 @@ public class PortfolioController {
     private Result result;
     @Inject
     private UserDAO personDAO;
-    
-    @Inject 
+
+    @Inject
     private CategoryDAO cateDAO;
-    
+
     @Public
     @Get(value = {"", "/",})
     public void login() {
@@ -55,26 +55,26 @@ public class PortfolioController {
     @Path(value = {"{id}"}, priority = Path.LOW)
     @Get
     public void edit(String id) {
-        
-        result.include("carro", id);
+
+        result.include("person", id);
         result.forwardTo(this).form();
     }
 
     @Path(value = {"/documents/new"}, priority = Path.HIGH)
     @Get
     public void form() {
-        result.include("categories",  cateDAO.find().asList());
+        result.include("categories", cateDAO.find().asList());
 
-    
     }
-    
+
     @Path(value = {"/documents/save",})
     @Get
-    public void saveForm(){
-        
+    public void saveForm() {
+        Document newdoc = new Document();
+        loggedUser.getPessoa().Add(newdoc);
+        result.redirectTo(this).panel();
     }
 
-    
     @Public
     @Path(value = {"/register",})
     @Get
@@ -83,9 +83,9 @@ public class PortfolioController {
             result.redirectTo(this).panel();
         }
     }
-
-
     
+ 
+
     @Post
     public void save(@Valid Person p) {
         validator.onErrorForwardTo(this).form();
@@ -106,16 +106,19 @@ public class PortfolioController {
     @Get
     public void panel() {
         if (loggedUser.isLogged()) {
-        result.include("status", true);
-        result.include("usuario", loggedUser.getPessoa());
-        Person teste = personDAO.get(loggedUser.getPessoa().getId());
-        
-        //Tentei add um documento diretamente na classe de usuario para exibir porém ele fica dando null eu sinceramente não sei o porque...
-        //Document meuDoc = new Document();
-        //teste.Add(meuDoc);
-        //teste.Add(teste2);
-        result.include("documentoList", teste.getDocumentos());
-        //result.include("documentoList", teste.getDocumentos());
+            result.include("status", true);
+            result.include("usuario", loggedUser.getPessoa());
+            Person teste = personDAO.get(loggedUser.getPessoa().getId());
+
+            //Tentei add um documento diretamente na classe de usuario para exibir porém ele fica dando null eu sinceramente não sei o porque...
+            
+            Document meuDoc = new Document();
+            //tenta adicionar desta forma
+            personDAO.get(loggedUser.getPessoa().getId()).Add(meuDoc);
+            //teste.Add(meuDoc);
+            //teste.Add(teste2);
+            result.include("documentoList", teste.getDocumentos());
+            //result.include("documentoList", teste.getDocumentos());
         }
     }
 
@@ -124,7 +127,6 @@ public class PortfolioController {
         System.out.println("Erro de Autenticação");
     }
 
-    
     @Public
     @Get
     @Path(value = {"/logout",})
@@ -138,8 +140,9 @@ public class PortfolioController {
     public void categoria() {
         result.include("status", true);
         result.include("usuario", loggedUser.getPessoa());
-        if (loggedUser.getPessoa().getRank()!= 2) {
+        if (loggedUser.getPessoa().getRank() != 2) {
             result.redirectTo(this).panel();
+             System.out.println("Erro de usuario nao autorizado");
         }
     }
 
@@ -148,25 +151,19 @@ public class PortfolioController {
     public List<Category> listcategories() {
         result.include("status", true);
         result.include("usuario", loggedUser.getPessoa());
-        if (loggedUser.getPessoa().getRank()!= 2) {
+        if (loggedUser.getPessoa().getRank() != 2) {
             result.redirectTo(this).panel();
         }
         return cateDAO.find().asList();
 
     }
 
-
-    
     @Post
-    @Path(value = {"/categories/save",})
     public void savecat(@Valid Category c) {
-        
         System.out.println(c.getName());
-
-        
-        if (c.getName() == null){
+        if (c.getName() == null) {
             validator.add(new SimpleMessage("dao", "Favor Informe o nome da categoria"));
-        }else{
+        } else {
             try {
                 this.cateDAO.save(c);
             } catch (Exception ex) {
@@ -177,9 +174,31 @@ public class PortfolioController {
         validator.onErrorForwardTo(this).categoria();
     }
     
+    @Post
+    public void deletecat(Category cat){
+        this.cateDAO.deleteById(cat.getId());
+        result.redirectTo(this).listcategories();
+    }
+    
+    @Path(value = {"/categories/{id}"}, priority = Path.LOW)
+    @Get
+    public void editcat(String id) {
+
+        result.include("cat", id);
+        result.forwardTo(this).categoria();
+    }
+
+    @Post
+    public void updatePerson() {
+        personDAO.updateUserDAO(this.loggedUser.getPessoa());
+         result.redirectTo(this).panel();
+    }
     
     
     
+    
+    
+
     @Public
     @Post
     public void autenticar(Person p) {

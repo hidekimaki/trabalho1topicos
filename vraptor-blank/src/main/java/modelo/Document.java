@@ -25,6 +25,11 @@ public class Document {
     }
 
     public Document() {
+        this.date = 1234;
+        this.lastupdate = 1234;
+        this.filename = "teste";
+        
+        this.categoria = 1;
     }
 
     public ObjectId getId() {

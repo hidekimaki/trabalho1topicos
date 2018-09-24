@@ -1,10 +1,12 @@
 modelo\Document.class
 DAO\MongoClientProvider.class
 br\edu\utfpr\md\webapp\PrimeiroController.class
+Controllers\Conversor.class
 DAO\DocumentoDAO.class
 DAO\CategoryDAO.class
 autorizacao\logged.class
 DAO\KeywordDAO.class
+Controllers\Conversor$ObjectIdVRaptorConverter.class
 autorizacao\Public.class
 modelo\Category.class
 autorizacao\Interceptor.class
