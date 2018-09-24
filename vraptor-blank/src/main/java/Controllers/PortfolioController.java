@@ -55,6 +55,7 @@ public class PortfolioController {
     @Path(value = {"{id}"}, priority = Path.LOW)
     @Get
     public void edit(String id) {
+        
         result.include("carro", id);
         result.forwardTo(this).form();
     }
@@ -104,8 +105,18 @@ public class PortfolioController {
     @Path(value = {"/panel",})
     @Get
     public void panel() {
+        if (loggedUser.isLogged()) {
         result.include("status", true);
         result.include("usuario", loggedUser.getPessoa());
+        Person teste = personDAO.get(loggedUser.getPessoa().getId());
+        
+        //Tentei add um documento diretamente na classe de usuario para exibir porém ele fica dando null eu sinceramente não sei o porque...
+        //Document meuDoc = new Document();
+        //teste.Add(meuDoc);
+        //teste.Add(teste2);
+        result.include("documentoList", teste.getDocumentos());
+        //result.include("documentoList", teste.getDocumentos());
+        }
     }
 
     @Get

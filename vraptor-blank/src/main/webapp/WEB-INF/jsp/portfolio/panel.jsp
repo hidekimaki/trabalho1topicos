@@ -29,10 +29,7 @@
                     </tr>
                     <c:forEach items="${documentoList}" var="document">
                         <tr>
-                            <td>${document.id}</td>
-                            <td>${document.name}</td>
-                            <td>${document.create}</td>
-                            <td>${document.update}</td>
+
                             <td>Etiquetas</td>
                             <td>
                                 <div class="btn-group mr-2" role="group" aria-label="First group">
