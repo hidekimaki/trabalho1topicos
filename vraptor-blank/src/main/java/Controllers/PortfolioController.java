@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import DAO.CategoryDAO;
 import DAO.UserDAO;
 import autorizacao.Public;
 import autorizacao.logged;
@@ -34,13 +35,10 @@ public class PortfolioController {
     private Result result;
     @Inject
     private UserDAO personDAO;
-<<<<<<< HEAD
     
 
-=======
     @Inject 
     private CategoryDAO cateDAO;
->>>>>>> 359739d2636c507219ede5c3c48435b331f40b2d
     
     @Public
     @Get(value = {"", "/",})
@@ -67,24 +65,23 @@ public class PortfolioController {
     public void form() {
         
     }
+    
+    @Path(value = {"/documents/save",})
+    @Get
+    public void saveForm(){
+        
+    }
 
     
     @Public
     @Path(value = {"/register",})
     @Get
-<<<<<<< HEAD
     public void register() {
         if (loggedUser.isLogged()) {
             result.redirectTo(this).panel();
         }
-=======
-    public void register(){
-        if(loggedUser.isLogged()){ 
-           result.redirectTo(this).login();
-        }    
->>>>>>> 359739d2636c507219ede5c3c48435b331f40b2d
-        System.out.println("Abrindo a página register");
     }
+
 
     
     @Post
@@ -93,15 +90,14 @@ public class PortfolioController {
         System.out.println("Marca: " + p.getName());
         System.out.println("Modelo: " + p.getUser());
         System.out.println("Modelo: " + p.getPass());
-
+        p.setRank(2);
         try {
             //this.carroDAO.insert(carro);
             this.personDAO.save(p);
         } catch (Exception ex) {
-            ex.printStackTrace();
             validator.add(new SimpleMessage("dao", "Erro ao gravar Carro"));
         }
-        result.redirectTo(this).panel();
+        result.redirectTo(this).login();
     }
 
     @Path(value = {"/panel",})
@@ -127,38 +123,47 @@ public class PortfolioController {
 
     @Get
     @Path(value = {"/categories/new",})
-<<<<<<< HEAD
     public void categoria() {
-
+        if (loggedUser.getPessoa().getRank()!= 2) {
+            result.redirectTo(this).panel();
+        }
     }
 
     @Get
     @Path(value = {"/categories/all",})
     public void listcategories() {
-
+        if (loggedUser.getPessoa().getRank()!= 2) {
+            result.redirectTo(this).panel();
+        }
     }
 
-=======
-    public void categoria(){
-    }
+
     
     @Post
+    @Path(value = {"/categories/save",})
     public void savecat(@Valid Category c) {
-        validator.onErrorForwardTo(this).form();
-        System.out.println("Nome: " + c.getName());
-        try {
-            this.cateDAO.save(c);
-        }catch(Exception ex) {
-            ex.printStackTrace();
-            validator.add(new SimpleMessage("dao", "Erro ao gravar Categoria"));
+        
+        System.out.println(c.getName());
+
+        
+        if (c.getName() == null){
+            validator.add(new SimpleMessage("dao", "Favor Informe o nome da categoria"));
+        }else{
+
+            try {
+                this.cateDAO.save(c);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                validator.add(new SimpleMessage("dao", "Erro ao gravar Categoria"));
+            }
+            result.redirectTo(this).panel();
         }
-         result.redirectTo(this).panel();
+        validator.onErrorForwardTo(this).categoria();
     }
     
     
     
     
->>>>>>> 359739d2636c507219ede5c3c48435b331f40b2d
     @Public
     @Post
     public void autenticar(Person p) {

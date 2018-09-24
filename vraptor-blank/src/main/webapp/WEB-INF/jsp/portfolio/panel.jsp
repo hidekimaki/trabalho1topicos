@@ -12,7 +12,7 @@
 
         <div style="margin-top: 10px;">
             <div style="margin-bottom: 10px; margin-left: 10px;">
-                <a href="./new" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" style="">+ Adicionar Novo Documento</a>    
+                <a href="./documents/new" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" style="">+ Adicionar Novo Documento</a>    
             </div>
             <div style="margin-left: 10px; margin-right: 10px; top: 0px;">
 
@@ -25,11 +25,19 @@
                         <th>Etiquetas</th>
                         <th>Opções</th>
                     </tr>
-                    <c:forEach items="${carroList}" var="car">
+                    <c:forEach items="${documentoList}" var="document">
                         <tr>
-                            <td>${car.id}</td>
-                            <td>${car.marca}</td>
-                            <td>${car.modelo}</td>
+                            <td>${document.id}</td>
+                            <td>${document.name}</td>
+                            <td>${document.create}</td>
+                            <td>${document.update}</td>
+                            <td>Etiquetas</td>
+                            <td>
+                                <div class="btn-group mr-2" role="group" aria-label="First group">
+                                <button type="button" class="btn btn-secondary">Editar</button>
+                                <button type="button" class="btn btn-secondary">Deletar</button>
+                                </div>
+                            </td>
                             <td></td>
                         </tr>
                     </c:forEach>

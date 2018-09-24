@@ -29,20 +29,34 @@
                         <a class="nav-link" href="${linkTo[PortfolioController].login}">Home<span class="sr-only">(current)</span></a>
                     </li>
                     <c:if test="${status}">  
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
+                    <c:if test="${usuario.getRank() == 2}">  
+                    <li class="nav-item dropdown ">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
+                            Categorias
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="${linkTo[PortfolioController].categoria}">Nova Categoria</a>
+                            <a class="dropdown-item" href="${linkTo[PortfolioController].listcategories}">Todas as Categorias</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Something else here</a>
                         </div>
+
                     </li>
+                    </c:if>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Documentos
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="${linkTo[PortfolioController].form}">Novo Document</a>
+                            <a class="dropdown-item" href="${linkTo[PortfolioController].panel}">Todos meus Documentos</a>
+                        </div>
+
+                    </li>
+                    
+                    
+                    
                     <li class="nav-item">
                         <a class="nav-link disabled" href="#">Disabled</a>
                     </li>
@@ -52,7 +66,7 @@
                             ${usuario.getName()}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="position: static;" >
-                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="">Action</a>
                             <a class="dropdown-item" href="#">Another action</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="${linkTo[PortfolioController].logout}">Sair</a>
