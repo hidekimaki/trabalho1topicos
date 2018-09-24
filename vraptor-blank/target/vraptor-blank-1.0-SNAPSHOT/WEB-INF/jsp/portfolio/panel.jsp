@@ -6,6 +6,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 
 <c:import url="/WEB-INF/jsp/includes/header.jsp" />     
@@ -42,6 +44,11 @@
                         </tr>
                     </c:forEach>
                 </table>
+                <c:if test="${fn:length(documentoList) == 0}">
+                    <div class="alert alert-warning" role="alert" style="margin-top: 10px">
+                        Nenhum Documento Encontrado!
+                    </div>
+                </c:if>
             </div>
         </div>
     </body>

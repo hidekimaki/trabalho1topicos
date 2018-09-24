@@ -12,7 +12,7 @@ import org.mongodb.morphia.annotations.Id;
 @Entity
 public class Category {
     
-        @Id
+    @Id
     private ObjectId id;
     
     private String name;
@@ -28,6 +28,9 @@ public class Category {
     
     public Category(String name) {
         this.name = name;
+    }
+    
+    public Category() {
     }
     
     public String getName() {

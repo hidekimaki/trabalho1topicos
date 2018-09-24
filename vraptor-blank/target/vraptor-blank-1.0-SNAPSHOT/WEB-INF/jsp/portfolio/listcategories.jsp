@@ -6,6 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 
 <c:import url="/WEB-INF/jsp/includes/header.jsp" />     
@@ -20,24 +21,27 @@
                     <tr>
                         <th>ID</th>
                         <th>Nome</th>
+                        <th>Açoes</th>
                     </tr>
-                    <c:forEach items="${documentoList}" var="document">
+                    <c:forEach items="${categoryList}" var="cat">
                         <tr>
-                            <td>${document.id}</td>
-                            <td>${document.name}</td>
-                            <td>${document.create}</td>
-                            <td>${document.update}</td>
-                            <td>Etiquetas</td>
+                            <td>${cat.id}</td>
+                            <td>${cat.name}</td>
                             <td>
                                 <div class="btn-group mr-2" role="group" aria-label="First group">
                                 <button type="button" class="btn btn-secondary">Editar</button>
                                 <button type="button" class="btn btn-secondary">Deletar</button>
                                 </div>
                             </td>
-                            <td></td>
                         </tr>
                     </c:forEach>
+                        
                 </table>
+                                    <c:if test="${fn:length(categoryList) == 0}">
+                    <div class="alert alert-warning" role="alert" style="margin-top: 10px">
+                        Nnenhuma categoria cadastrada!
+                    </div>
+                    </c:if>
             </div>
         </div>
     </body>

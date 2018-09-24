@@ -25,7 +25,7 @@
                 <div class="input-group" style="margin-top: 10px">
                     <select class="form-control">
                         <option>Selecione uma Categoria</option>
-                        <c:forEach items="${cat}" var="cat">
+                        <c:forEach items="${categories}" var="cat">
                             <option>${cat.name}</option>
                         </c:forEach>
                     </select>

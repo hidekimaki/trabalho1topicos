@@ -36,7 +36,6 @@ public class PortfolioController {
     @Inject
     private UserDAO personDAO;
     
-
     @Inject 
     private CategoryDAO cateDAO;
     
@@ -63,7 +62,9 @@ public class PortfolioController {
     @Path(value = {"/documents/new"}, priority = Path.HIGH)
     @Get
     public void form() {
-        
+        result.include("categories",  cateDAO.find().asList());
+
+    
     }
     
     @Path(value = {"/documents/save",})
@@ -124,6 +125,8 @@ public class PortfolioController {
     @Get
     @Path(value = {"/categories/new",})
     public void categoria() {
+        result.include("status", true);
+        result.include("usuario", loggedUser.getPessoa());
         if (loggedUser.getPessoa().getRank()!= 2) {
             result.redirectTo(this).panel();
         }
@@ -131,10 +134,14 @@ public class PortfolioController {
 
     @Get
     @Path(value = {"/categories/all",})
-    public void listcategories() {
+    public List<Category> listcategories() {
+        result.include("status", true);
+        result.include("usuario", loggedUser.getPessoa());
         if (loggedUser.getPessoa().getRank()!= 2) {
             result.redirectTo(this).panel();
         }
+        return cateDAO.find().asList();
+
     }
 
 
@@ -149,14 +156,12 @@ public class PortfolioController {
         if (c.getName() == null){
             validator.add(new SimpleMessage("dao", "Favor Informe o nome da categoria"));
         }else{
-
             try {
                 this.cateDAO.save(c);
             } catch (Exception ex) {
-                ex.printStackTrace();
                 validator.add(new SimpleMessage("dao", "Erro ao gravar Categoria"));
             }
-            result.redirectTo(this).panel();
+            result.redirectTo(this).listcategories();
         }
         validator.onErrorForwardTo(this).categoria();
     }
