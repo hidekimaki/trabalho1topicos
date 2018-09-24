@@ -30,10 +30,30 @@
                             <td>
                                 <div class="btn-group mr-2" role="group" aria-label="First group">
                                 <button type="button" class="btn btn-secondary">Editar</button>
-                                <button type="button" class="btn btn-secondary">Deletar</button>
+                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#delete${cat.id}">Deletar</button>
                                 </div>
                             </td>
                         </tr>
+                        <div class="modal fade" id="delete${cat.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Deseja Deletar esta Categoria ?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Tem certeza que deseja continuar ? , Esta Operação não poderá ser desfeita! 
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <a href="./delete/${cat.id}" class="btn btn-primary" role="button" aria-pressed="true" style="">- Remover Categoria</a>    
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </c:forEach>
                         
                 </table>

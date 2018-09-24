@@ -6,7 +6,18 @@
   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<c:import url="/WEB-INF/jsp/includes/header.jsp" /> 
+<c:import url="/WEB-INF/jsp/includes/header.jsp" />
+        <c:if test="${not empty errors}">
+        <c:forEach items="${errors}" var="err">
+        <div class="alert alert-danger" role="alert" style="
+        width: 80%;
+        left: 10%;
+        margin-top: 1%;
+        margin-left: 0px">
+            ${err.message}
+        </div>
+        </c:forEach>
+        </c:if>
         <div style="z-index: -1; position: absolute; width: 500px; height: 100px; top: 40%; left: 50%; margin: -100px 0 0 -250px;">
             <h3>Registro</h3>
             <div class="progress" style=" height: 5px;">

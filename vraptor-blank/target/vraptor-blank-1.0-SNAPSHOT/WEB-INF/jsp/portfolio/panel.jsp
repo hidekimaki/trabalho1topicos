@@ -27,7 +27,7 @@
                         <th>Etiquetas</th>
                         <th>Opções</th>
                     </tr>
-                    <c:forEach items="${documentoList}" var="document">
+                    <c:forEach items="${documentList}" var="document">
                         <tr>
 
                             <td>Etiquetas</td>
@@ -41,7 +41,7 @@
                         </tr>
                     </c:forEach>
                 </table>
-                <c:if test="${fn:length(documentoList) == 0}">
+                <c:if test="${fn:length(documentList) == 0}">
                     <div class="alert alert-warning" role="alert" style="margin-top: 10px">
                         Nenhum Documento Encontrado!
                     </div>

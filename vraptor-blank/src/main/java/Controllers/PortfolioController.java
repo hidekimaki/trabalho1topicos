@@ -59,6 +59,17 @@ public class PortfolioController {
         result.include("person", id);
         result.forwardTo(this).form();
     }
+    
+        @Path(value = {"{id}"}, priority = Path.LOW)
+    @Get
+    public void editcat(String id) {
+        Conversor ObjetoId = new Conversor();
+        ObjetoId.
+        result.include(this.cateDAO.get(id));
+
+        result.include("person", id);
+        result.forwardTo(this).form();
+    }
 
     @Path(value = {"/documents/new"}, priority = Path.HIGH)
     @Get
@@ -85,41 +96,49 @@ public class PortfolioController {
     }
     
  
-
+    @Public
+    @Path(value = {"/register/save",})
     @Post
     public void save(@Valid Person p) {
-        validator.onErrorForwardTo(this).form();
-        System.out.println("Marca: " + p.getName());
-        System.out.println("Modelo: " + p.getUser());
-        System.out.println("Modelo: " + p.getPass());
         p.setRank(2);
-        try {
-            //this.carroDAO.insert(carro);
-            this.personDAO.save(p);
-        } catch (Exception ex) {
-            validator.add(new SimpleMessage("dao", "Erro ao gravar Carro"));
+        Person teste = personDAO.createQuery().field("user").equal(p.getUser()).get();
+        if(teste != null){
+            System.out.println("Usuario já existe");
+
+            validator.add(new SimpleMessage("dao", "Nome de Usuario já Existe"));
+        }else{
+            System.out.println("Usuario nao existe");
+
+            try {
+                this.personDAO.save(p);
+                result.forwardTo(this).login();
+                System.out.println("Tentei Salvar");
+            }catch (Exception ex){
+                validator.add(new SimpleMessage("dao", "Erro ao gravar Carro"));
+            }
         }
-        result.redirectTo(this).login();
+            validator.onErrorRedirectTo(this).register();
     }
 
     @Path(value = {"/panel",})
     @Get
-    public void panel() {
+    public List<Document> panel() {
+        List<Document> MinhadocumentList = null;
+
         if (loggedUser.isLogged()) {
             result.include("status", true);
             result.include("usuario", loggedUser.getPessoa());
-            Person teste = personDAO.get(loggedUser.getPessoa().getId());
-
+            Person teste = new Person();
+            teste = personDAO.get(loggedUser.getPessoa().getId());
+            
             //Tentei add um documento diretamente na classe de usuario para exibir porém ele fica dando null eu sinceramente não sei o porque...
             
-            Document meuDoc = new Document();
+            Document meuDoc = new Document(1234,1234,"teste",null,1);
             //tenta adicionar desta forma
             personDAO.get(loggedUser.getPessoa().getId()).Add(meuDoc);
-            //teste.Add(meuDoc);
-            //teste.Add(teste2);
-            result.include("documentoList", teste.getDocumentos());
-            //result.include("documentoList", teste.getDocumentos());
+
         }
+        return MinhadocumentList;
     }
 
     @Get

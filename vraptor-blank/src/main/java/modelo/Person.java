@@ -27,7 +27,17 @@ public class Person {
     }
     
     public void Add(Document newdoc){
-        documentos.add(newdoc);
+
+        try {
+            documentos.add(newdoc);
+        } catch (Exception ex) {
+            // bloco de tratamento associado à condição de
+            // exceção XException ou a qualquer uma de suas
+            // subclasses, identificada aqui pelo objeto
+            // com referência ex
+        }
+
+        
     }
     
     public List<Document> getDocumentos() {
