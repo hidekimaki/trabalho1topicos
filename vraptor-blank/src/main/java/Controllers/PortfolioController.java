@@ -24,6 +24,7 @@ import modelo.Category;
 import modelo.Document;
 import modelo.Person;
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.query.Query;
 
 @Controller
 @Path("/portfolio")
@@ -82,15 +83,12 @@ public class PortfolioController {
     }
 
     @Path(value = {"/documents/save",})
-    @Get
+    @Post
     public void saveForm() {
         Document newdoc = new Document();
         newdoc.setIdPerson(loggedUser.getPessoa().getId().toString());
-        
-        loggedUser.getPessoa().Add(newdoc);
+        //loggedUser.getPessoa().Add(newdoc);
         docDAO.save(newdoc);
-        
-        
         result.redirectTo(this).panel();
     }
 
@@ -146,7 +144,9 @@ public class PortfolioController {
             personDAO.get(loggedUser.getPessoa().getId()).Add(meuDoc);
 
         }
-        return MinhadocumentList;
+        //return MinhadocumentList;
+        
+        return docDAO.find( docDAO.createQuery().field("idPerson").equal(loggedUser.getPessoa().getId().toString())).asList();
     }
 
     @Get
