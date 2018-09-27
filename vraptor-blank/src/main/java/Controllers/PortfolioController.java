@@ -17,6 +17,7 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -84,10 +85,13 @@ public class PortfolioController {
 
     @Path(value = {"/documents/save",})
     @Post
-    public void saveForm() {
-        Document newdoc = new Document();
+    public void saveForm(Document newdoc) {
         newdoc.setIdPerson(loggedUser.getPessoa().getId().toString());
-        //loggedUser.getPessoa().Add(newdoc);
+        Date now = new Date();
+        long longtime = System.currentTimeMillis()/1000L ;
+        newdoc.setDate(longtime);
+        
+    ///loggedUser.getPessoa().Add(newdoc);
         docDAO.save(newdoc);
         result.redirectTo(this).panel();
     }
@@ -207,7 +211,12 @@ public class PortfolioController {
         result.redirectTo(this).listcategories();
     }
     
-
+    @Post
+    public void deletedoc(Document doc){
+        this.docDAO.deleteById(doc.getId());
+        result.redirectTo(this).panel();
+    }
+   
 
     @Post
     public void updatePerson() {

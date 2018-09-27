@@ -47,9 +47,12 @@
                                         Tem certeza que deseja continuar ? , Esta Operação não poderá ser desfeita! 
                                     </div>
                                     <div class="modal-footer">
+                                        
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                        <a href="./delete/${cat.id}" class="btn btn-primary" role="button" aria-pressed="true" style="">- Remover Categoria</a>    
-
+                                        <form action="${linkTo[PortfolioController].deletecat}" method="POST">
+                                            <input type="hidden" value="${cat.id}" name="cat.id">
+                                           <button style="margin-top: 10px" name="action" value="Save" type="submit" class="btn btn-primary">- Remover</button>
+                                        </form>        
                                     </div>
                                 </div>
                             </div>

@@ -15,14 +15,13 @@ public class Document {
     private long lastupdate;
     private String filename;
     private List<Keyword> keywords;
-    private int categoria;
+    private String categoria;
 
     public Document(long date, long lastupdate, String filename, List<Keyword> keywords, int categoria) {
         this.date = date;
         this.lastupdate = lastupdate;
         this.filename = filename;
         this.keywords = keywords;
-        this.categoria = categoria;
     }
 
     public Document() {
@@ -30,7 +29,7 @@ public class Document {
         this.lastupdate = 1234;
         this.filename = "teste";
         
-        this.categoria = 1;
+        this.categoria = "1";
     }
 
     public ObjectId getId() {
@@ -86,14 +85,7 @@ public class Document {
         this.keywords = keywords;
     }
 
-    public int getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(int categoria) {
-        this.categoria = categoria;
-    }
-    
+  
     
     
 }

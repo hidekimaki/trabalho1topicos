@@ -19,11 +19,11 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"  id="basic-addon1">Nome do Documento</span>
                     </div>
-                    <input type="text" value="" class="form-control" name="p.user"  aria-label="Username" aria-describedby="basic-addon1">
+                    <input type="text" value="" class="form-control" name="newdoc.filename"  aria-label="Username" aria-describedby="basic-addon1">
                 </div>
 
                 <div class="input-group" style="margin-top: 10px">
-                    <select class="form-control">
+                    <select name="" class="form-control">
                         <option>Selecione uma Categoria</option>
                         <c:forEach items="${categories}" var="cat">
                             <option>${cat.name}</option>
