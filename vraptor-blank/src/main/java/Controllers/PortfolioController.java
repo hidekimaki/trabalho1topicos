@@ -22,6 +22,7 @@ import javax.validation.Valid;
 import modelo.Category;
 import modelo.Document;
 import modelo.Person;
+import org.bson.types.ObjectId;
 
 @Controller
 @Path("/portfolio")
@@ -60,13 +61,12 @@ public class PortfolioController {
         result.forwardTo(this).form();
     }
     
-        @Path(value = {"{id}"}, priority = Path.LOW)
+    @Path(value = {"{id}"}, priority = Path.LOW)
     @Get
     public void editcat(String id) {
         Conversor convesor = new Conversor();
-       ObjectId  objetoid =  convesor.convert(id, S);
+        ObjectId  objetoid =  convesor.convert(id, ObjectId.class);
               //  result.include(this.cateDAO.get(id));
-
         result.include("person", id);
         result.forwardTo(this).form();
     }
@@ -199,13 +199,7 @@ public class PortfolioController {
         result.redirectTo(this).listcategories();
     }
     
-    @Path(value = {"/categories/{id}"}, priority = Path.LOW)
-    @Get
-    public void editcat(String id) {
 
-        result.include("cat", id);
-        result.forwardTo(this).categoria();
-    }
 
     @Post
     public void updatePerson() {
