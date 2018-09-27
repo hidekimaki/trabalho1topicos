@@ -63,9 +63,9 @@ public class PortfolioController {
         @Path(value = {"{id}"}, priority = Path.LOW)
     @Get
     public void editcat(String id) {
-            Conversor ObjetoId = new Conversor();
-        ObjetoId.convert(id, S)
-                result.include(this.cateDAO.get(id));
+        Conversor convesor = new Conversor();
+       ObjectId  objetoid =  convesor.convert(id, S);
+              //  result.include(this.cateDAO.get(id));
 
         result.include("person", id);
         result.forwardTo(this).form();
