@@ -10,6 +10,7 @@ public class Document {
         @Id
     private ObjectId id;
     
+    private String idPerson;
     private long date;
     private long lastupdate;
     private String filename;
@@ -38,6 +39,14 @@ public class Document {
 
     public void setId(ObjectId id) {
         this.id = id;
+    }
+
+    public String getIdPerson() {
+        return idPerson;
+    }
+
+    public void setIdPerson(String idPerson) {
+        this.idPerson = idPerson;
     }
 
     

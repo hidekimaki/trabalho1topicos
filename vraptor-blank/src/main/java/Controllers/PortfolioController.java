@@ -6,6 +6,7 @@
 package Controllers;
 
 import DAO.CategoryDAO;
+import DAO.DocumentoDAO;
 import DAO.UserDAO;
 import autorizacao.Public;
 import autorizacao.logged;
@@ -36,7 +37,9 @@ public class PortfolioController {
     private Result result;
     @Inject
     private UserDAO personDAO;
-
+    @Inject
+    private DocumentoDAO docDAO;
+    
     @Inject
     private CategoryDAO cateDAO;
 
@@ -82,7 +85,12 @@ public class PortfolioController {
     @Get
     public void saveForm() {
         Document newdoc = new Document();
+        newdoc.setIdPerson(loggedUser.getPessoa().getId().toString());
+        
         loggedUser.getPessoa().Add(newdoc);
+        docDAO.save(newdoc);
+        
+        
         result.redirectTo(this).panel();
     }
 
